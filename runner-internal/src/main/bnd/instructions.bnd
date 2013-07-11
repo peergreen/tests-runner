@@ -1,0 +1,5 @@
+Import-Package !org.junit.*,!junit.*,!bsh, com.google.inject.*;resolution:=optional,org.apache.tools.ant.*;resolution:=optional,org.yaml.*;resolution:=optional,*
+Export-Package com.peergreen.tests.runner, org.testng.annotations, org.testng
+Private-Package com.peergreen.tests.runner.internal.*
+                
+Embed-Dependency testng;inline=true,jcommander;inline=true
