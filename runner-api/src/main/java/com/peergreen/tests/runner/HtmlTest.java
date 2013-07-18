@@ -16,6 +16,7 @@
 package com.peergreen.tests.runner;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -47,7 +48,7 @@ public class HtmlTest {
 
         HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
         httpConnection.setRequestMethod("GET");
-        httpConnection.setRequestProperty("Accept", "text/html");
+        httpConnection.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         if (login != null && password != null) {
             String userpass = login + ":" + password;
             String encodedAuth = "Basic " + javax.xml.bind.DatatypeConverter.printBase64Binary(userpass.getBytes());
@@ -85,7 +86,7 @@ public class HtmlTest {
             try {
                 httpConnection = (HttpURLConnection) url.openConnection();
                 httpConnection.setRequestMethod("GET");
-                httpConnection.setRequestProperty("Accept", "text/html");
+                httpConnection.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
                 if (encodedPassword != null) {
                     httpConnection.setRequestProperty ("Authorization", encodedPassword);
                 }
@@ -109,8 +110,23 @@ public class HtmlTest {
     }
 
 
-
-
+    /**
+     * Delete the directory
+     */
+    protected static void delete(File file) {
+        if (!file.exists()) {
+            return;
+        }
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File subFile : files) {
+                delete(subFile);
+            }
+            file.delete();
+        } else {
+            file.delete();
+        }
+    }
 
 
 }
